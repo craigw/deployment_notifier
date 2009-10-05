@@ -54,7 +54,7 @@ module Blankpad
       end
 
       def message
-        Message.new.to_s
+        Message.new(capistrano, Blankpad::DeploymentNotifier.deployer).to_s.gsub(/\n/, "\\n")
       end
     end
 
@@ -81,7 +81,7 @@ module Blankpad
 
 Application: #{capistrano[:application]}
 Stage: #{capistrano[:stage]}
-Source: #{capistrano[:source]}
+Repository: #{capistrano[:repository]}
 Revision: #{capistrano[:revision]}
 Previous revision: #{capistrano[:previous_revision]}
 EOM

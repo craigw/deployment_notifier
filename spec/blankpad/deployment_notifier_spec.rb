@@ -115,6 +115,14 @@ describe Blankpad::DeploymentNotifier do
           Blankpad::DeploymentNotifier::Message.stub!(:new).and_return(message)
           @mailer.message
         end
+
+        it "should escape any newline characters" do
+          message = mock("a message")
+          message.should_receive(:to_s).and_return("the message to send\n")
+
+          Blankpad::DeploymentNotifier::Message.stub!(:new).and_return(message)
+          @mailer.message.should match(/\\n/)
+        end
       end
     end
   end
@@ -167,7 +175,7 @@ describe Blankpad::DeploymentNotifier do
       properties = {
         :application        => "application_name",
         :stage              => "stage",
-        :source             => "git://github.com/example/example_org.git",
+        :repository         => "git://github.com/example/example_org.git",
         :revision           => "f8ds98f0sd8f0sd8",
         :previous_revision  => "f9s8fsd8f0sd0sdf"
       }
