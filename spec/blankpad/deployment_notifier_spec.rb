@@ -176,7 +176,7 @@ describe Blankpad::DeploymentNotifier do
         :application        => "application_name",
         :stage              => "stage",
         :repository         => "git://github.com/example/example_org.git",
-        :revision           => "f8ds98f0sd8f0sd8",
+        :current_revision   => "f8ds98f0sd8f0sd8",
         :previous_revision  => "f9s8fsd8f0sd0sdf"
       }
       

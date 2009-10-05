@@ -1,3 +1,5 @@
+require 'etc'
+
 module Blankpad
   # A Capistrano plugin to send deployment notifications
   module DeploymentNotifier
@@ -77,12 +79,12 @@ module Blankpad
 
       def body
         body = <<EOM
-#{@deployer} has deployed revision #{capistrano[:revision]} of #{capistrano[:application]} to #{capistrano[:stage]}
+#{@deployer} has deployed revision #{capistrano[:current_revision]} of #{capistrano[:application]} to #{capistrano[:stage]}
 
 Application: #{capistrano[:application]}
 Stage: #{capistrano[:stage]}
 Repository: #{capistrano[:repository]}
-Revision: #{capistrano[:revision]}
+Current Revision: #{capistrano[:current_revision]}
 Previous revision: #{capistrano[:previous_revision]}
 EOM
       end
