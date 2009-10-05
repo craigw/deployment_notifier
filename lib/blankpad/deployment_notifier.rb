@@ -93,3 +93,14 @@ EOM
     end
   end
 end
+
+if Object.const_defined?("Capistrano")
+  Capistrano::Configuration.instance(:must_exist).load do
+    namespace "deploy" do
+      desc "Send a notification e-mail to people who want one"
+      task :notify do
+        Blankpad::DeploymentNotifier::Mailer.new(self).deliver!
+      end
+    end
+  end
+end
