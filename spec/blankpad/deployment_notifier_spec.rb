@@ -36,17 +36,7 @@ describe Blankpad::DeploymentNotifier do
       Blankpad::DeploymentNotifier.from.should eql(from)
     end
 
-    it "should allow the person deploying to be set and retrieved" do
-      deployer = "Deployer"
-
-      Blankpad::DeploymentNotifier.deployer = deployer
-      Blankpad::DeploymentNotifier.deployer.should eql(deployer)
-    end
-
-    it "should default the deployer to the currently logged in user" do
-      # Damn class variables.
-      Blankpad::DeploymentNotifier.deployer = nil
-      
+    it "should allow the person deploying to be retrieved" do
       Etc.stub!(:getlogin).and_return("jon")
       Blankpad::DeploymentNotifier.deployer.should eql("jon")
     end

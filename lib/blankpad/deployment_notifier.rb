@@ -23,13 +23,8 @@ module Blankpad
       @@from = from
     end
     
-    @@deployer = ""
     def self.deployer
-      @@deployer || Etc.getlogin
-    end
-
-    def self.deployer=(deployer)
-      @@deployer = deployer
+      Etc.getlogin
     end
 
     # Responsible for taking the e-mail to send, and sending it using the remote
