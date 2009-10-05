@@ -171,13 +171,14 @@ describe Blankpad::DeploymentNotifier do
       }
       
       before(:each) do
+        @capistrano.stub!(:[]).and_return(nil) 
         properties.each do |name, value|
           add_property(name, value)
         end
-
+        
         Etc.stub!(:getlogin).and_return("deployer")
       end
-      
+            
       it "should include a summary" do
         @message.body.should match(/deployer has deployed revision f8ds98f0sd8f0sd8 of application_name to stage/i)
       end
@@ -186,6 +187,12 @@ describe Blankpad::DeploymentNotifier do
         it "should include the #{name} property" do
           @message.body.should match(/#{name.to_s.gsub("_", " ")}: #{value}/i)
         end
+      end
+
+      it "should include the explanation when a message has been set" do
+        add_property :message, "Because I feel like it."
+
+        @message.body.should match(/Because I feel like it./)
       end
     end
 

@@ -82,6 +82,9 @@ Repository: #{capistrano[:repository]}
 Current Revision: #{capistrano[:current_revision]}
 Previous revision: #{capistrano[:previous_revision]}
 EOM
+        body = capistrano[:message] + "\n\n#{body}" if capistrano[:message]
+
+        body
       end
 
       def to_s
