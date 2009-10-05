@@ -22,12 +22,14 @@ begin
 
   desc "Run all specs"
   Spec::Rake::SpecTask.new('spec') do |t|
-    t.spec_files = FileList['spec//*_spec.rb']
+    t.libs = [ 'lib' ]
+    t.spec_files = FileList['spec/**/*_spec.rb']
   end
   
   desc "Run all specs, with coverage"
   Spec::Rake::SpecTask.new('spec:coverage') do |t|
-    t.spec_files = FileList['spec//*_spec.rb']
+    t.libs = [ 'lib' ]
+    t.spec_files = FileList['spec/**/*_spec.rb']
     t.rcov = true
     t.rcov_opts = ['--exclude', 'spec,osx\/objc,gems\/']
   end
