@@ -35,6 +35,8 @@ rescue LoadError
   puts "RSpec and RCov are required to run tests. Install it with: sudo gem install rspec rcov"
 end
 
+task :default => :spec
+
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   if File.exist?('VERSION')
