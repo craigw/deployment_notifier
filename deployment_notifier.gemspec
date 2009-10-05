@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{deployment_notifier}
-  s.version = "0.0.0"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jon Wood"]
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "deployment_notifier.gemspec",
      "lib/blankpad/deployment_notifier.rb",
      "spec/blankpad/deployment_notifier_spec.rb",
      "spec/spec_helper.rb"
