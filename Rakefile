@@ -24,8 +24,15 @@ begin
   Spec::Rake::SpecTask.new('spec') do |t|
     t.spec_files = FileList['spec//*_spec.rb']
   end
+  
+  desc "Run all specs, with coverage"
+  Spec::Rake::SpecTask.new('spec:coverage') do |t|
+    t.spec_files = FileList['spec//*_spec.rb']
+    t.rcov = true
+    t.rcov_opts = ['--exclude', 'spec,osx\/objc,gems\/']
+  end
 rescue LoadError
-  puts "RSpec is required to run tests. Install it with: sudo gem install rspec"
+  puts "RSpec and RCov are required to run tests. Install it with: sudo gem install rspec rcov"
 end
 
 require 'rake/rdoctask'
