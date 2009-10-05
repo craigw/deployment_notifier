@@ -5,15 +5,46 @@ A plugin for Capistrano to send out notification e-mails on deployment.
 I'm aware of cap_gun, but that attempts to send the e-mails locally, which is
 no good in an environment where we don't have local SMTP servers.
 
+== Usage
+
+Add the following to your Capfile:
+
+  begin
+    require 'blankpad/deployment_notifier'
+  rescue LoadError
+    puts "You need to install the deployment_notifier gem to deploy, so e-mail notifications will go out."
+    puts "- gem install gemcutter"
+    puts "- gem tumble"
+    puts "- gem install deployment_notifier"
+    exit 1
+  end
+
+  Blankpad::DeploymentNotifier.recipients = %w[recipient@example.org someone_else@example.org]
+  Blankpad::DeploymentNotifier.from = "Deployment Notifications <deploy@example.org>"
+
+  after :"deploy:restart", :"deploy:notify"
+
+And that's it. You can test it works by using:
+
+  cap staging deploy:notify
+
+If you'd like to add a message stating why you're deploying to the top of the notification, then deploy like this:
+
+  cap -s message="I just really like seeing those e-mails" staging deploy
+
+== Limitations
+
+While it shouldn't be too hard to extend this, it's currently built to scratch the particular itch I was having.
+
+* Requires sendmail on the server you're deploying to, at /usr/sbin/sendmail
+* Assumes you're using capistrano/ext/multistage (because I always am)
+
 == Note on Patches/Pull Requests
  
 * Fork the project.
 * Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but
-   bump version in a commit by itself I can ignore when I pull)
+* Add tests for it. This is important so I don't break it in a future version unintentionally.
+* Commit, do not mess with rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
 == Copyright
