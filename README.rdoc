@@ -1,6 +1,9 @@
 = deployment_notifier
 
-Description goes here.
+A plugin for Capistrano to send out notification e-mails on deployment.
+
+I'm aware of cap_gun, but that attempts to send the e-mails locally, which is
+no good in an environment where we don't have local SMTP servers.
 
 == Note on Patches/Pull Requests
  
