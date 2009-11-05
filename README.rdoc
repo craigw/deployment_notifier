@@ -5,7 +5,9 @@ A plugin for Capistrano to send out notification e-mails on deployment.
 I'm aware of cap_gun, but that attempts to send the e-mails locally, which is
 no good in an environment where we don't have local SMTP servers.
 
-== Usage
+== Configuration
+
+=== Using a gem
 
 Add the following to your Capfile:
 
@@ -24,7 +26,18 @@ Add the following to your Capfile:
 
   after :"deploy:restart", :"deploy:notify"
 
-And that's it. You can test it works by using:
+=== Using a plugin
+
+  script/plugin install git://github.com/craigw/deployment_notifier.git
+
+Add this to config/deploy.rb:
+
+  Blankpad::DeploymentNotifier.recipients = %w[recipient@example.org someone_else@example.org]
+  Blankpad::DeploymentNotifier.from = "Deployment Notifications <deploy@example.org>"
+
+== Testing
+
+You can test it works by using:
 
   cap staging deploy:notify
 
